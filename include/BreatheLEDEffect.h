@@ -1,4 +1,4 @@
-#ifndef BEATHE_LED_EFFECT_H
+#ifndef BREATHE_LED_EFFECT_H
 #define BREATHE_LED_EFFECT_H
 
 #include <Arduino.h>
