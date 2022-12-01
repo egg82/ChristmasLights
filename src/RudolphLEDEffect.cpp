@@ -71,5 +71,16 @@ void RudolphLEDEffect::loop(const double_t delta) {
 }
 
 bool RudolphLEDEffect::destroy(const double_t delta) {
+    if (_slider < 1.0 && _slider > 0.0) {
+        loop(delta);
+        return false;
+    }
+
+    for (uint16_t i = 0; i < _numLeds; i++) {
+        _leds[i].h = 0.0;
+        _leds[i].s = 255.0;
+        _leds[i].v = 0.0;
+    }
+    
     return true;
 }
