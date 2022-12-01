@@ -33,6 +33,19 @@ LEDEffect *effects[NUM_EFFECTS] = {
 
 LEDEngine* engine;
 
+uint16_t counter = 0;
+uint16_t switchCount = 0;
+
+void resetSwitch() {
+  counter = 0;
+  switchCount = random16(4096, 8192);
+
+  if (PRINT_INFO) {
+    Serial.printf("[Main] (INFO) Switch counter: %d\n", switchCount);
+    Serial.flush();
+  }
+}
+
 void setup() {
   pinMode(RANDOM_PIN, INPUT);
   random16_set_seed(analogRead(RANDOM_PIN));
@@ -48,6 +61,8 @@ void setup() {
   }
   random16_add_entropy(analogRead(RANDOM_PIN));
   randomSeed(random16() + random16() + analogRead(RANDOM_PIN));
+
+  resetSwitch();
 
   for (uint16_t i = 0; i < NUM_LEDS; i++) {
     leds[i] = CRGB();
@@ -67,13 +82,13 @@ void setup() {
 }
 
 void switchEffect() {
-  uint8_t effect = random8(NUM_EFFECTS);
-  if (PRINT_DEBUG) {
-    Serial.printf("[Main] (DEBUG) Attempting to randomly change effect to %s\n", effects[effect]->getName());
-    Serial.flush();
+  if (NUM_EFFECTS <= 1) {
+    return;
   }
-  if (effect == currentEffect) {
-    return; // Let the effect go a little longer
+
+  uint8_t effect = random8(NUM_EFFECTS);
+  while (effect == currentEffect) {
+    effect = random8(NUM_EFFECTS);
   }
 
   if (PRINT_INFO) {
@@ -96,9 +111,19 @@ void loop() {
     random16_add_entropy(analogRead(RANDOM_PIN));
     randomSeed(random16() + random16() + random16() + random16() + analogRead(RANDOM_PIN));
   }
-  if (random8() == 3) {
+
+  if (counter >= switchCount) {
+    resetSwitch();
     switchEffect();
+  } else {
+    counter++;
   }
+
+  /*if (counter % 100 == 0) {
+    Serial.printf("Counter: %d/%d\n", counter, switchCount);
+    Serial.flush();
+  }*/
+
   int32_t delayms = REFRESH_RATE - (micros() - start);
   if (delayms > 0) {
     //Serial.printf("Delaying for %d micros\n", delayms);
