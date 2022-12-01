@@ -11,6 +11,7 @@
 
 #include "BreatheLEDEffect.h"
 #include "RudolphLEDEffect.h"
+#include "BlinkLEDEffect.h"
 
 #define NUM_LEDS 16
 #define DATA_PIN 3
@@ -23,10 +24,11 @@ CRGB leds[NUM_LEDS];
 CDHSV ledsHSV[NUM_LEDS];
 uint8_t currentEffect;
 
-#define NUM_EFFECTS 2
+#define NUM_EFFECTS 3
 LEDEffect *effects[NUM_EFFECTS] = {
   new BreatheLEDEffect(ledsHSV, NUM_LEDS),
-  new RudolphLEDEffect(ledsHSV, NUM_LEDS)
+  new RudolphLEDEffect(ledsHSV, NUM_LEDS),
+  new BlinkLEDEffect(ledsHSV, NUM_LEDS)
 };
 
 LEDEngine* engine;
