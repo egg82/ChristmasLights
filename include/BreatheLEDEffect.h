@@ -17,12 +17,11 @@ class BreatheLEDEffect : public LEDEffect {
         bool canSetupConcurrently() { return false; }
         bool canDestroyConcurrently() { return false; }
 
-        BreatheLEDEffect(CDHSV* leds, const uint16_t numLeds) : LEDEffect(leds, numLeds), _isSetup{false}, _rand{random8()}, _hsv{getNewCHSV(_rand)}, _easingValues{new double[numLeds]}, _direction{true} {};
+        BreatheLEDEffect(CDHSV* leds, const uint16_t numLeds) : LEDEffect(leds, numLeds), _isSetup{false}, _hsv{getNewCHSV(random8())}, _easingValues{new double[numLeds]}, _direction{true} {};
     
     private:
         bool _isSetup;
     
-        uint8_t _rand;
         CDHSV _hsv;
         double_t* _easingValues; // Eases translate linear motion into eased motion, so applying an ease on top of an ease is a bad idea
         bool _direction;

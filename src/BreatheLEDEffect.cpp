@@ -33,8 +33,7 @@ void BreatheLEDEffect::loop(const double_t delta) {
     } else {
         if (breatheDown(delta)) {
             // We're at 0, change the color to something random and change direction
-            _rand = random8();
-            _hsv = getNewCHSV(_rand);
+            _hsv = getNewCHSV(random8());
             for (uint16_t i = 0; i < _numLeds; i++) {
                 _leds[i].h = _hsv.h;
                 _leds[i].s = _hsv.s;
