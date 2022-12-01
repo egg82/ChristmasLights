@@ -35,16 +35,19 @@ LEDEngine* engine;
 
 void setup() {
   pinMode(RANDOM_PIN, INPUT);
+  random16_set_seed(analogRead(RANDOM_PIN));
   randomSeed(analogRead(RANDOM_PIN));
 
   Serial.begin(9600);
 
-  randomSeed(random16() + analogRead(RANDOM_PIN));
-
   // sanity check delay - allows reprogramming if accidently blowing power w/leds
-  delay(7500);
-
-  randomSeed(random16() + analogRead(RANDOM_PIN));
+  for (uint16_t i = 0; i < 75; i++) {
+    random16_add_entropy(analogRead(RANDOM_PIN));
+    randomSeed(random16() + random16() + analogRead(RANDOM_PIN));
+    delay(100);
+  }
+  random16_add_entropy(analogRead(RANDOM_PIN));
+  randomSeed(random16() + random16() + analogRead(RANDOM_PIN));
 
   for (uint16_t i = 0; i < NUM_LEDS; i++) {
     leds[i] = CRGB();
@@ -90,6 +93,7 @@ void loop() {
       Serial.printf("[Main] (DEBUG) Random seed: %d\n", analogRead(RANDOM_PIN));
       Serial.flush();
     }
+    random16_add_entropy(analogRead(RANDOM_PIN));
     randomSeed(random16() + random16() + random16() + random16() + analogRead(RANDOM_PIN));
   }
   if (random8() == 3) {
