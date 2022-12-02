@@ -19,7 +19,7 @@ class RudolphLEDEffect : public LEDEffect {
         bool canSetupConcurrently() { return false; }
         bool canDestroyConcurrently() { return false; }
 
-        RudolphLEDEffect(CDHSV* leds, const uint16_t numLeds) : LEDEffect(leds, numLeds), _direction{random8() > 127}, _slider{_direction ? 0.0 : 1.0} {};
+        RudolphLEDEffect(CDHSV* leds, const uint16_t numLeds) : LEDEffect(leds, numLeds), _direction{random8() > 127}, _slider{_direction ? -1.0 : 1.0} {};
     
     private:
         bool _direction;
