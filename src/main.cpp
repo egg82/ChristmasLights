@@ -13,6 +13,7 @@
 #include "RudolphLEDEffect.h"
 #include "BlinkLEDEffect.h"
 #include "SnowLEDEffect.h"
+#include "RideLEDEffect.h"
 
 #define NUM_LEDS 16
 #define DATA_PIN 3
@@ -30,12 +31,13 @@ LEDEngine* engine;
 uint16_t counter = 0;
 uint16_t switchCount = 0;
 
-#define NUM_EFFECTS 4
+#define NUM_EFFECTS 5
 LEDEffect *effects[NUM_EFFECTS] = {
   new BreatheLEDEffect(ledsHSV, NUM_LEDS),
   new RudolphLEDEffect(ledsHSV, NUM_LEDS),
   new BlinkLEDEffect(ledsHSV, NUM_LEDS),
-  new SnowLEDEffect(ledsHSV, NUM_LEDS)
+  new SnowLEDEffect(ledsHSV, NUM_LEDS),
+  new RideLEDEffect(ledsHSV, NUM_LEDS)
 };
 
 void resetSwitch() {
