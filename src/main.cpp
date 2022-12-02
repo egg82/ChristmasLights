@@ -30,11 +30,11 @@ LEDEngine* engine;
 uint16_t counter = 0;
 uint16_t switchCount = 0;
 
-#define NUM_EFFECTS 1
+#define NUM_EFFECTS 4
 LEDEffect *effects[NUM_EFFECTS] = {
-  //new BreatheLEDEffect(ledsHSV, NUM_LEDS),
-  //new RudolphLEDEffect(ledsHSV, NUM_LEDS),
-  //new BlinkLEDEffect(ledsHSV, NUM_LEDS)
+  new BreatheLEDEffect(ledsHSV, NUM_LEDS),
+  new RudolphLEDEffect(ledsHSV, NUM_LEDS),
+  new BlinkLEDEffect(ledsHSV, NUM_LEDS),
   new SnowLEDEffect(ledsHSV, NUM_LEDS)
 };
 
