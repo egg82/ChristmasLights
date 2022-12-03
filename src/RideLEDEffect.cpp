@@ -30,9 +30,9 @@ void RideLEDEffect::loop(const double_t delta) {
     _easingValues[lead] = 1.0;
 
     if (_direction) {
-        _slider += 0.01 * delta;
+        _slider += 0.003 * delta;
     } else {
-        _slider -= 0.01 * delta;
+        _slider -= 0.003 * delta;
     }
 
     breatheDown(delta);

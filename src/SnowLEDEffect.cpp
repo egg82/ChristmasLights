@@ -27,10 +27,10 @@ bool SnowLEDEffect::setup(const double_t delta) {
 void SnowLEDEffect::loop(const double_t delta) {
     breatheDown(delta);
     if (random8() <= 5) {
-        uint8_t leds = random8(1, (uint8_t) (_numLeds / 4));
+        uint8_t leds = random8(1, (uint8_t) (_numLeds / 8));
         for (uint8_t i = 0; i < leds; i++) {
             uint16_t led = random16(0, _numLeds);
-            _leds[led] = CDHSV(_hsv.h, _hsv.s, random8((uint8_t) (_hsv.v / 4), (uint8_t) _hsv.v));
+            _leds[led] = CDHSV(_hsv.h, _hsv.s, random8((uint8_t) (_hsv.v / 6), (uint8_t) _hsv.v));
             _easingValues[led] = _leds[led].v / _hsv.v;
         }
     }
