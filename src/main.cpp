@@ -15,7 +15,7 @@
 #include "SnowLEDEffect.h"
 #include "RideLEDEffect.h"
 
-#define NUM_LEDS 16
+#define NUM_LEDS 300
 #define DATA_PIN 3
 #define CLOCK_PIN 13
 #define RANDOM_PIN 23
@@ -31,9 +31,9 @@ LEDEngine* engine;
 uint16_t counter = 0;
 uint16_t switchCount = 0;
 
-#define NUM_EFFECTS 5
+#define NUM_EFFECTS 4
 LEDEffect *effects[NUM_EFFECTS] = {
-  new BreatheLEDEffect(ledsHSV, NUM_LEDS),
+  //new BreatheLEDEffect(ledsHSV, NUM_LEDS), // Girlfriend absolutely HATES this one
   new RudolphLEDEffect(ledsHSV, NUM_LEDS),
   new BlinkLEDEffect(ledsHSV, NUM_LEDS),
   new SnowLEDEffect(ledsHSV, NUM_LEDS),

@@ -27,14 +27,24 @@ void RudolphLEDEffect::loop(const double_t delta) {
                 _leds[lead - i] = _pattern[i];
             }
         }
-        _slider += 0.005 * delta;
+        for (uint8_t i = 0; i < 5; i++) {
+            if (lead - RUDOLPH_PATTERN_SIZE - i >= 0 && lead - RUDOLPH_PATTERN_SIZE - i < _numLeds) {
+                _leds[lead - RUDOLPH_PATTERN_SIZE - i] = CDHSV(0.0, 255.0, 0.0); // Blank
+            }
+        }
+        _slider += 0.001 * delta;
     } else {
         for (uint8_t i = 0; i < RUDOLPH_PATTERN_SIZE; i++) {
             if (lead + i >= 0 && lead + i < _numLeds) {
                 _leds[lead + i] = _pattern[i];
             }
         }
-        _slider -= 0.005 * delta;
+        for (uint8_t i = 0; i < 5; i++) {
+            if (lead + RUDOLPH_PATTERN_SIZE + i >= 0 && lead + RUDOLPH_PATTERN_SIZE + i < _numLeds) {
+                _leds[lead + RUDOLPH_PATTERN_SIZE + i] = CDHSV(0.0, 255.0, 0.0); // Blank
+            }
+        }
+        _slider -= 0.001 * delta;
     }
 
     if (_slider > 1.0) {
